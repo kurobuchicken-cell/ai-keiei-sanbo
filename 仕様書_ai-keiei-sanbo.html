@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>仕様書_ai-keiei-sanbo</title>
+<style>
+  body { font-family: "Hiragino Sans", "Meiryo", sans-serif; line-height: 1.7; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #222; }
+  h1 { border-bottom: 3px solid #2c3e50; padding-bottom: 8px; }
+  h2 { border-left: 6px solid #2c3e50; padding-left: 10px; margin-top: 2em; background: #f5f6f7; }
+  h3 { color: #2c3e50; margin-top: 1.5em; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; vertical-align: top; }
+  th { background: #2c3e50; color: #fff; }
+  tr:nth-child(even) { background: #fafafa; }
+  code, pre { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-family: Consolas, monospace; }
+  pre { padding: 12px; overflow-x: auto; }
+  .status-未定 { color: #b35900; font-weight: bold; }
+  .status-検討中 { color: #1a5fb4; font-weight: bold; }
+  .note { background: #fff8e1; border-left: 4px solid #f0ad4e; padding: 10px 14px; margin: 1em 0; }
+  footer { margin-top: 3em; color: #888; font-size: 0.85em; }
+</style>
+</head>
+<body>
+
+<h1>仕様書_ai-keiei-sanbo</h1>
+<p>
+  作成日：2026-06-22<br>
+  プロジェクト名：ai-keiei-sanbo（AI経営参謀）<br>
+  ステータス：<span class="status-検討中">構想・要件整理フェーズ（実装未着手）</span>
+</p>
+
+<div class="note">
+  本仕様書は CLAUDE.md に記載の構想と、リポジトリ内に既にあるサンプルレポート3点（MeetMemo向け）の内容を基に作成。
+  技術スタックなど未確定の項目は「未定」として明記し、決定時に本書を更新する。
+</div>
+
+<h2>1. プロジェクト概要</h2>
+<p>
+  ユーザーが事業アイデア・業界情報を入力すると、AI（Anthropic Claude API）が市場調査・競合分析・SWOT分析・財務計画などを含む
+  本格的な事業計画書を自動生成するWebアプリケーション。
+</p>
+
+<h2>2. 背景・目的</h2>
+<p>
+  新規事業の立ち上げ時に必要な市場調査・競合分析・事業計画書の作成には専門知識と時間がかかる。
+  これをAIが代行し、起業家・事業企画担当者が短時間で精度の高い事業計画のドラフトを得られるようにする。
+</p>
+
+<h2>3. 主要機能</h2>
+<table>
+<tr><th>機能</th><th>内容</th><th>サンプル出力（リポジトリ内）</th></tr>
+<tr>
+  <td>市場分析レポート自動生成</td>
+  <td>市場規模・成長率・トレンドを含むレポートを生成</td>
+  <td>戦略設計_議事録SaaS・業務効率化_20260528.md（PEST分析を含む）</td>
+</tr>
+<tr>
+  <td>競合分析</td>
+  <td>主要プレイヤーの整理、差別化ポイントの抽出</td>
+  <td>戦略設計_議事録SaaS・業務効率化_20260528.md（3C分析を含む）</td>
+</tr>
+<tr>
+  <td>SWOT分析</td>
+  <td>強み・弱み・機会・脅威の4軸で事業を整理</td>
+  <td>戦略設計_議事録SaaS・業務効率化_20260528.md（SWOT分析を含む）</td>
+</tr>
+<tr>
+  <td>事業検証レポート生成</td>
+  <td>課題仮説の検証、市場データに基づく裏付け</td>
+  <td>事業検証レポート_MeetMemo_20260528.md</td>
+</tr>
+<tr>
+  <td>事業計画書自動生成</td>
+  <td>エグゼクティブサマリー・ターゲット市場・ビジネスモデル・財務計画・マーケティング戦略</td>
+  <td>事業計画書_MeetMemo_草案_20260528.md</td>
+</tr>
+<tr>
+  <td>レポート出力</td>
+  <td>PDF / Word形式でのエクスポート</td>
+  <td><span class="status-未定">未実装</span></td>
+</tr>
+</table>
+
+<h2>4. 入出力イメージ</h2>
+<h3>入力</h3>
+<ul>
+  <li>事業アイデア（サービス概要、提供価値）</li>
+  <li>対象業界・ターゲット顧客</li>
+  <li>（任意）参考データ・既存資料</li>
+</ul>
+<h3>出力</h3>
+<ul>
+  <li>Markdown / HTML形式のレポート（現状のサンプルはMarkdown）</li>
+  <li>将来的にPDF/Word出力に対応予定</li>
+</ul>
+
+<h2>5. 技術スタック</h2>
+<table>
+<tr><th>区分</th><th>内容</th><th>状態</th></tr>
+<tr><td>フロントエンド</td><td>React または Next.js を想定</td><td class="status-未定">未定</td></tr>
+<tr><td>バックエンド</td><td>Python FastAPI または Node.js を想定</td><td class="status-未定">未定</td></tr>
+<tr><td>AI</td><td>Anthropic Claude API（claude-sonnet-4-6 / claude-opus-4-7）</td><td>決定済み</td></tr>
+<tr><td>データベース</td><td>-</td><td class="status-未定">未定</td></tr>
+<tr><td>出力</td><td>PDF生成ライブラリ</td><td class="status-未定">未定</td></tr>
+</table>
+
+<h2>6. ディレクトリ構成（予定）</h2>
+<pre>ai-keiei-sanbo/
+├── CLAUDE.md
+├── README.md
+├── frontend/        # フロントエンド
+├── backend/         # バックエンドAPI
+├── prompts/         # AIプロンプトテンプレート
+└── docs/            # ドキュメント</pre>
+
+<h2>7. 開発ガイドライン</h2>
+<ul>
+  <li>Claude APIを使う際はプロンプトキャッシングを有効にしてコストを抑える</li>
+  <li>生成するドキュメントは日本語をデフォルトとする</li>
+  <li>モデルはデフォルトで <code>claude-sonnet-4-6</code> を使用し、高品質出力が必要な場合は <code>claude-opus-4-7</code> を使用する</li>
+  <li>APIキーなどのシークレットは <code>.env</code> ファイルで管理し、リポジトリにはコミットしない</li>
+</ul>
+
+<h2>8. 環境変数</h2>
+<pre>ANTHROPIC_API_KEY=your_api_key_here</pre>
+
+<h2>9. 未決事項・今後の検討</h2>
+<ul>
+  <li>フロントエンド／バックエンドの技術選定</li>
+  <li>データベースの選定（ユーザー管理・生成履歴の保存が必要か）</li>
+  <li>PDF/Word出力の実装方式</li>
+  <li>レポート生成のプロンプト設計（<code>prompts/</code> 配下に格納予定）</li>
+</ul>
+
+<footer>
+  仕様に変更があった場合は、その都度本ファイルを更新し実装内容と一致させること。
+</footer>
+
+</body>
+</html>
